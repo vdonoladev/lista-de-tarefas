@@ -1,73 +1,73 @@
 import json
 
-def linha():
+def line():
     print('-'*50)
 
 
-def tabela():
+def table():
     print(
     '''
-    PARA A LISTA SER SALVA, FECHE O PROGRAMA USANDO O 4
+    FOR THE LIST TO BE SAVED, CLOSE THE PROGRAM USING 4
 
-    [1] | Adicionar tarefa
-    [2] | Listar tarefa
-    [3] | Desfazer a ultima tarefa
-    [4] | Sair
+     [1] | Add task
+     [2] | List task
+     [3] | Undo the last task
+     [4] | Go out
     '''
     )
 
 
-def desfazer(indice):
-    lista_de_tarefas.pop(-1)
+def undo(indice):
+    task_list.pop(-1)
     return indice
 
 
-lista_de_tarefas = []
+task_list = []
 
 while True:
-    linha()
-    tabela()
-    linha()
+    line()
+    table()
+    line()
 
     try:
-        opcao = int(input('Digite o que quer fazer: '))
-        if opcao == 1:
-            linha()
-            tarefa = str(input('Qual tarefa deseja adicionar? '))
-            lista_de_tarefas.append(tarefa)
-            print('Tarefa adicionada')
-            linha()
+        option = int(input('Type what you want to do: '))
+        if option == 1:
+            line()
+            task = str(input('Which task do you want to add? '))
+            task_list.append(task)
+            print('Task added!')
+            line()
 
-        elif opcao == 2:
+        elif option == 2:
             try:
-                arquivo_C_lista = 'lista_de_tarefas.json'
-                with open(arquivo_C_lista) as arquivo_salvo:
-                    lista_de_tarefas = json.load(arquivo_salvo)
-                    print(lista_de_tarefas)
+                file_C_list = 'task_list.json'
+                with open(file_C_list) as saved_file:
+                    task_list = json.load(saved_file)
+                    print(task_list)
             except:
-                linha()
-                print(lista_de_tarefas)
-                linha()
+                line()
+                print(task_list)
+                line()
 
-        elif opcao == 3:
+        elif option == 3:
             try:
-                desfazer(lista_de_tarefas)
-                print(lista_de_tarefas)
+                undo(task_list)
+                print(task_list)
             except IndexError:
-                print('Lista vazia, tem que adiconar algo a lista para poder ultilizar o desfazer.')
+                print('Empty list, you have to add something to the list in order to use undo.')
 
-        elif opcao == 4:
-            print('Termine sua lista anterior antes de escrever uma nova.\n'
-            'pois ao finalizar o programa a lista que tá sendo criada ira sobreescrever\n'
-            'a lista anterior já salva.')            
-            arquivo_C_lista = 'lista_de_tarefas.json'
-            with open(arquivo_C_lista, 'w') as arquivo_salvo:
-                json.dump(lista_de_tarefas, arquivo_salvo)
+        elif option == 4:
+            print('Finish your previous list before writing a new one.\n'
+             'because at the end of the program the list being created will overwrite\n'
+             'the previous list has already been saved.')            
+            file_C_list = 'task_list.json'
+            with open(file_C_list, 'w') as saved_file:
+                json.dump(task_list, saved_file)
 
-            print(f'Antes de sair. Sua lista é essa {lista_de_tarefas}')
+            print(f'Before you leave. Your list is this {task_list}')
 
-            sair = input('Aperte qualquer tecla para confimar a finalização do programa: ')
-            print('Programa finalizado!')
+            sair = input('Press any key to confirm the end of the program: ')
+            print('Program finished!')
             break
     except ValueError:
-        print('Digite um número que corresponde a o que quer fazer: ')
+        print('Enter a number that corresponds to what you want to do: ')
