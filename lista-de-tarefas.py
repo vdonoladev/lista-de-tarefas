@@ -1,12 +1,13 @@
 import json
 
+
 def line():
     print('-'*50)
 
 
 def table():
     print(
-    '''
+        '''
     FOR THE LIST TO BE SAVED, CLOSE THE PROGRAM USING 4
 
      [1] | Add task
@@ -54,12 +55,13 @@ while True:
                 undo(task_list)
                 print(task_list)
             except IndexError:
-                print('Empty list, you have to add something to the list in order to use undo.')
+                print(
+                    'Empty list, you have to add something to the list in order to use undo.')
 
         elif option == 4:
             print('Finish your previous list before writing a new one.\n'
-             'because at the end of the program the list being created will overwrite\n'
-             'the previous list has already been saved.')            
+                  'because at the end of the program the list being created will overwrite\n'
+                  'the previous list has already been saved.')
             file_C_list = 'task_list.json'
             with open(file_C_list, 'w') as saved_file:
                 json.dump(task_list, saved_file)
